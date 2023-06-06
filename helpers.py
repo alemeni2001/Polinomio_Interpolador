@@ -1,9 +1,9 @@
 import os
 import math
 
-WIDTH = 70
+SYMBOL = '█ '#'♡'#'✧ '#'█▒'
+WIDTH = int(100/len(SYMBOL))
 LEFTMARGIN = 2
-SYMBOL = '@'
 
 def cls():
     # Verificar el sistema operativo y ejecutar el comando correspondiente para limpiar la pantalla
@@ -31,15 +31,21 @@ def prTxt(txt, **kwargs):
     lf = bool(kwargs['lf']) if 'lf' in kwargs else False
     col = int(kwargs['col']) if 'col' in kwargs else 3
     
-    le = len(txt)
-    free = WIDTH - len(txt) - col*2
+    c1 = WIDTH*len(SYMBOL)
+    c2 = len(txt)
+    c3 = len(SYMBOL)*col*2
+    free =  c1 - c2 - c3
     left = math.floor(free/2)
     right = left if (free%2 == 0) else left+1
     txt_spaced = prSpc(left) + txt + prSpc(right)
    
+    for _ in range(up):
+        print("\n", end="")
     prLn(col,lf=lf)
     print(f"{txt_spaced}", end="")
-    prLn(col)    
+    prLn(col) 
+    for _ in range(dw):
+        print("\n", end="")  
 
 def lftMg():
     for _ in range(LEFTMARGIN):
@@ -50,4 +56,3 @@ def prSpc(size) -> str:
     for _ in range(size):
         whiteSpace += " "
     return whiteSpace
- 
